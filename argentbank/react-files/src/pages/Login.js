@@ -19,45 +19,37 @@ function Login() {
 		try {
 			let response = await axios({
 				method: "post",
-				url: "/users/token/",
+				url: "/api/v1/user/login",
 				withCredentials: true,
 				data: {
-					username: email,
+					email: email,
 					password: password,
 				},
 			});
-			localStorage.setItem("token", response.data.access);
-			localStorage.setItem("refresh", response.data.refresh);
-			dispatch(
-				loginAction(
-					response.data.username,
-					response.data.id,
-					response.data.access,
-					response.data.refresh
-				)
-			);
+			localStorage.setItem("token", response.data.token);
 			axios.defaults.headers.common[
 				"Authorization"
-			] = `Bearer ${response.data.access}`;
+			] = `Bearer ${response.data.token}`;
 
 			let response2 = await axios({
-				method: "get",
-				url: "/users/me/",
-				// headers: {
-				// 	Authorization: `Bearer ${localStorage.getItem("token")}`,
-				// },
+				method: "post",
+				url: "/user/profile/",
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
 			});
 
 			dispatch(
 				loginAction(
-					email,
-					response2.data.id,
-					response.data.access,
-					response.data.refresh
+					response2.data.body.id,
+					response2.data.body.email,
+					response2.data.body.firstName,
+					response2.data.body.lastName,
+					response.data.token
 				)
 			);
 			console.log(store.getState());
-			return navigate("/explorer/");
+			// return navigate("/explorer/");
 		} catch (error) {
 			setError(true);
 			console.log(error);
@@ -92,7 +84,9 @@ function Login() {
 						<input type="checkbox" id="remember-me" />
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
-					<button className="sign-in-button">Sign In</button>
+					<button className="sign-in-button" onClick={handleSubmit}>
+						Sign In
+					</button>
 					{error && (
 						<p className="error">
 							Identifiants incorrects, veuillez réessayer.
