@@ -12,6 +12,7 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
 	const dispatch = useDispatch();
+	const [rememberMe, setRememberMe] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -26,16 +27,19 @@ function Login() {
 					password: password,
 				},
 			});
-			localStorage.setItem("token", response.data.token);
+			const token = response.data.body.token;
+			if (rememberMe) {
+				localStorage.setItem("token", token);
+			}
 			axios.defaults.headers.common[
 				"Authorization"
 			] = `Bearer ${response.data.token}`;
 
 			let response2 = await axios({
 				method: "post",
-				url: "/user/profile/",
+				url: "/api/v1/user/profile/",
 				headers: {
-					Authorization: `Bearer ${localStorage.getItem("token")}`,
+					Authorization: `Bearer ${token}`,
 				},
 			});
 
@@ -45,7 +49,7 @@ function Login() {
 					response2.data.body.email,
 					response2.data.body.firstName,
 					response2.data.body.lastName,
-					response.data.token
+					token
 				)
 			);
 			console.log(store.getState());
@@ -81,7 +85,11 @@ function Login() {
 						/>
 					</div>
 					<div className="input-remember">
-						<input type="checkbox" id="remember-me" />
+						<input
+							type="checkbox"
+							id="remember-me"
+							onInput={(e) => setRememberMe(e.target.checked)}
+						/>
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
 					<button className="sign-in-button" onClick={handleSubmit}>

@@ -1,10 +1,11 @@
 import "../style/main.css";
 import argentBankLogo from "../assets/images/argentBankLogo.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import Logout from "./Logout";
 
 function Header() {
-	const [isLogged, setIsLogged] = useState(false);
+	const isLogged = useSelector((state) => state.isLoggedIn);
 	const handleClick = () => {
 		console.log("click");
 	};
@@ -21,9 +22,9 @@ function Header() {
 			</Link>
 			<div>
 				{isLogged ? (
-					<button className="main-nav-item" onClick={handleClick}>
-						<i className="fa fa-user-circle"></i> Sign out
-					</button>
+					<Logout className="main-nav-item">
+						<i className="fa fa-user-circle"></i>Logout
+					</Logout>
 				) : (
 					<Link className="main-nav-item" to="/login">
 						<i className="fa fa-user-circle"></i>
