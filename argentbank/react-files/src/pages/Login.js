@@ -12,7 +12,7 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
 	const dispatch = useDispatch();
-	const [rememberMe, setRememberMe] = useState(false);
+	// const [rememberMe, setRememberMe] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -28,9 +28,7 @@ function Login() {
 				},
 			});
 			const token = response.data.body.token;
-			if (rememberMe) {
-				localStorage.setItem("token", token);
-			}
+			localStorage.setItem("token", token);
 			axios.defaults.headers.common[
 				"Authorization"
 			] = `Bearer ${response.data.token}`;
@@ -53,7 +51,7 @@ function Login() {
 				)
 			);
 			console.log(store.getState());
-			// return navigate("/explorer/");
+			return navigate("/profile/");
 		} catch (error) {
 			setError(true);
 			console.log(error);
@@ -88,7 +86,7 @@ function Login() {
 						<input
 							type="checkbox"
 							id="remember-me"
-							onInput={(e) => setRememberMe(e.target.checked)}
+							//	onInput={(e) => setRememberMe(e.target.checked)}
 						/>
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
