@@ -6,6 +6,7 @@ import Logout from "./Logout";
 
 function Header() {
 	const isLogged = useSelector((state) => state.isLoggedIn);
+	const isLogged2 = localStorage.getItem("isLogged");
 	const handleClick = () => {
 		console.log("click");
 	};
@@ -21,7 +22,7 @@ function Header() {
 				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
 			<div>
-				{isLogged ? (
+				{isLogged || isLogged2 ? (
 					<Logout className="main-nav-item">
 						<i className="fa fa-user-circle"></i>Logout
 					</Logout>

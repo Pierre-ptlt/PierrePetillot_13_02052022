@@ -1,9 +1,10 @@
 import "../style/main.css";
 import store from "../store";
+import { useSelector } from "react-redux";
 
 function Profile() {
-	console.log(store.getState());
-	return <div>profil</div>;
+	let content = localStorage.getItem("email");
+	return <div>{content}</div>;
 }
 
 export default Profile;

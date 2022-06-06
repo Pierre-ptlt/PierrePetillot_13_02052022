@@ -12,7 +12,7 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
 	const dispatch = useDispatch();
-	// const [rememberMe, setRememberMe] = useState(false);
+	const [rememberMe, setRememberMe] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -50,6 +50,11 @@ function Login() {
 					token
 				)
 			);
+			localStorage.setItem("email", response2.data.body.email);
+			localStorage.setItem("firstName", response2.data.body.firstName);
+			localStorage.setItem("lastName", response2.data.body.lastName);
+			localStorage.setItem("id", response2.data.body.id);
+			localStorage.setItem("isLogged", true);
 			console.log(store.getState());
 			return navigate("/profile/");
 		} catch (error) {
@@ -86,7 +91,7 @@ function Login() {
 						<input
 							type="checkbox"
 							id="remember-me"
-							//	onInput={(e) => setRememberMe(e.target.checked)}
+							onInput={(e) => setRememberMe(e.target.checked)}
 						/>
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
