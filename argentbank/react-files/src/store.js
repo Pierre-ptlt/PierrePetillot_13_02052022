@@ -26,8 +26,12 @@ export const reducer = (state = initialState, action) => {
 		case "UPDATE":
 			return {
 				...state,
+				isLoggedIn: true,
+				id: action.payload.id,
+				email: action.payload.email,
 				firstName: action.payload.firstName,
 				lastName: action.payload.lastName,
+				token: action.payload.token,
 			};
 		default:
 			return state;
@@ -45,11 +49,14 @@ export const loginAction = (id, email, firstName, lastName, token) => ({
 	},
 });
 
-export const updateAction = (firstName, lastName) => ({
+export const updateAction = (id, email, firstName, lastName, token) => ({
 	type: "UPDATE",
 	payload: {
+		id,
+		email,
 		firstName,
 		lastName,
+		token,
 	},
 });
 

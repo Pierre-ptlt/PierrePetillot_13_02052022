@@ -1,5 +1,5 @@
 import "../style/main.css";
-import store from "../store";
+import store, { updateAction } from "../store";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -23,16 +23,19 @@ function Profile() {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("token")}`,
 			},
-		}).then((response) => {
-			console.log(response);
-			setFirstName(response.data.body.firstName);
-			setLasttName(response.data.body.lastName);
-		});
+		})
+			.then((response) => {
+				console.log(response);
+				setFirstName(response.data.body.firstName);
+				setLasttName(response.data.body.lastName);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}, [stateFirstName, stateLastName]);
 
 	const handleEdit = (e) => {
 		e.preventDefault();
-		console.log(newFirstName, newLastName);
 		axios
 			.put(
 				"/api/v1/user/profile/",
@@ -47,10 +50,20 @@ function Profile() {
 				}
 			)
 			.then((response) => {
-				dispatch(newFirstName, newLastName);
+				dispatch(
+					updateAction(
+						response.data.body.id,
+						response.data.body.email,
+						newFirstName,
+						newLastName,
+						localStorage.getItem("token")
+					)
+				);
 				localStorage.setItem("firstName", newFirstName);
 				localStorage.setItem("lastName", newLastName);
-				console.log(response);
+				console.log(response, store.getState());
+				setFirstName(newFirstName);
+				setLasttName(newLastName);
 			})
 			.catch((error) => {
 				console.log(error);
