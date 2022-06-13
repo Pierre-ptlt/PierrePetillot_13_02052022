@@ -12,7 +12,11 @@ function Logout() {
 		console.log(store.getState());
 	};
 
-	return <button onClick={handleLogout}>Logout</button>;
+	return (
+		<button className="main-nav-item" onClick={handleLogout}>
+			Logout
+		</button>
+	);
 }
 
 export default Logout;

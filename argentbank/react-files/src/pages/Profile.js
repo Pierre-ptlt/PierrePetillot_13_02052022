@@ -64,6 +64,7 @@ function Profile() {
 				console.log(response, store.getState());
 				setFirstName(newFirstName);
 				setLasttName(newLastName);
+				setEdit(false);
 			})
 			.catch((error) => {
 				console.log(error);
