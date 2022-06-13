@@ -7,6 +7,8 @@ import Logout from "./Logout";
 function Header() {
 	const isLogged = useSelector((state) => state.isLoggedIn);
 	const isLogged2 = localStorage.getItem("isLogged");
+	const name = useSelector((state) => state.firstName);
+	const name2 = localStorage.getItem("firstName");
 
 	return (
 		<nav className="main-nav">
@@ -20,9 +22,13 @@ function Header() {
 			</Link>
 			<div>
 				{isLogged || isLogged2 ? (
-					<Logout className="main-nav-item">
-						<i className="fa fa-user-circle"></i>Logout
-					</Logout>
+					<div className="logged-wrapper">
+						<Link to="/profile" className="profile-link">
+							<i className="fa fa-user-circle"></i>
+							{name ? name : name2}
+						</Link>
+						<Logout />
+					</div>
 				) : (
 					<Link className="main-nav-item" to="/login">
 						<i className="fa fa-user-circle"></i>
