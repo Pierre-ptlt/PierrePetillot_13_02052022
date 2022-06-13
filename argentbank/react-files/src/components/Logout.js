@@ -8,7 +8,7 @@ function Logout() {
 		e.preventDefault();
 		dispatch(logoutAction());
 		localStorage.clear();
-		window.location.href = "/login";
+		window.location.href = "/";
 		console.log(store.getState());
 	};
 

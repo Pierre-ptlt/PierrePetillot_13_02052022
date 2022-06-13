@@ -23,6 +23,12 @@ export const reducer = (state = initialState, action) => {
 			};
 		case "LOGOUT":
 			return initialState;
+		case "UPDATE":
+			return {
+				...state,
+				firstName: action.payload.firstName,
+				lastName: action.payload.lastName,
+			};
 		default:
 			return state;
 	}
@@ -36,6 +42,14 @@ export const loginAction = (id, email, firstName, lastName, token) => ({
 		firstName,
 		lastName,
 		token,
+	},
+});
+
+export const updateAction = (firstName, lastName) => ({
+	type: "UPDATE",
+	payload: {
+		firstName,
+		lastName,
 	},
 });
 

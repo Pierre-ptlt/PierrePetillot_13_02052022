@@ -1,7 +1,7 @@
 import "../style/main.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import store from "../store";
 import { loginAction } from "../store";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,12 @@ function Login() {
 	const [error, setError] = useState(null);
 	const dispatch = useDispatch();
 	const [rememberMe, setRememberMe] = useState(false);
+
+	useEffect(() => {
+		if (localStorage.getItem("isLogged")) {
+			navigate("/profile");
+		}
+	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

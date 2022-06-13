@@ -7,9 +7,6 @@ import Logout from "./Logout";
 function Header() {
 	const isLogged = useSelector((state) => state.isLoggedIn);
 	const isLogged2 = localStorage.getItem("isLogged");
-	const handleClick = () => {
-		console.log("click");
-	};
 
 	return (
 		<nav className="main-nav">
