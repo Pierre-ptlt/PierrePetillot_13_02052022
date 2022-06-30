@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import store from "../store";
 import { loginAction } from "../store";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function Login() {
 	let navigate = useNavigate();
@@ -70,47 +71,50 @@ function Login() {
 	};
 
 	return (
-		<div className="main bg-dark login-dark">
-			<div className="sign-in-content">
-				<i className="fa fa-user-circle sign-in-icon"></i>
-				<h1>Sign In</h1>
-				<form>
-					<div className="input-wrapper">
-						<label htmlFor="username">Username</label>
-						<input
-							type="email"
-							id="username"
-							placeholder="Email"
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</div>
-					<div className="input-wrapper">
-						<label htmlFor="password">Password</label>
-						<input
-							type="password"
-							id="password"
-							placeholder="Password"
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</div>
-					<div className="input-remember">
-						<input
-							type="checkbox"
-							id="remember-me"
-							onInput={(e) => setRememberMe(e.target.checked)}
-						/>
-						<label htmlFor="remember-me">Remember me</label>
-					</div>
-					<button className="sign-in-button" onClick={handleSubmit}>
-						Sign In
-					</button>
-					{error && (
-						<p className="error">
-							Identifiants incorrects, veuillez réessayer.
-						</p>
-					)}
-				</form>
+		<div>
+			<div className="main bg-dark login-dark">
+				<div className="sign-in-content">
+					<i className="fa fa-user-circle sign-in-icon"></i>
+					<h1>Sign In</h1>
+					<form>
+						<div className="input-wrapper">
+							<label htmlFor="username">Username</label>
+							<input
+								type="email"
+								id="username"
+								placeholder="Email"
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+						</div>
+						<div className="input-wrapper">
+							<label htmlFor="password">Password</label>
+							<input
+								type="password"
+								id="password"
+								placeholder="Password"
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+						</div>
+						<div className="input-remember">
+							<input
+								type="checkbox"
+								id="remember-me"
+								onInput={(e) => setRememberMe(e.target.checked)}
+							/>
+							<label htmlFor="remember-me">Remember me</label>
+						</div>
+						<button className="sign-in-button" onClick={handleSubmit}>
+							Sign In
+						</button>
+						{error && (
+							<p className="error">
+								Identifiants incorrects, veuillez réessayer.
+							</p>
+						)}
+					</form>
+				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }

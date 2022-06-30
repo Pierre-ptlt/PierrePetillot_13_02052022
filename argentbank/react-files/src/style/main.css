@@ -326,6 +326,33 @@ body {
   color: #fff;
 }
 
+.editName-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.editName-input {
+  margin-left: 20px;
+  height: 25px;
+}
+
+.editName-fields {
+  margin-left: -20px;
+}
+
+.editName-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin-left: -50px;
+}
+
+.editName-button {
+  margin-left: 50px;
+}
+
 @media (min-width: 720px) {
   .account {
     flex-direction: row;
@@ -337,5 +364,15 @@ body {
 
   .transaction-button {
     width: 200px;
+  }
+}
+
+@media (max-width: 720px) {
+  .login-dark {
+    height: 640px;
+  }
+
+  .logged-wrapper {
+    width: 180px;
   }
 }

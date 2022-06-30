@@ -3,6 +3,7 @@ import store, { updateAction } from "../store";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Footer from "../components/Footer";
 
 function Profile() {
 	const dispatch = useDispatch();
@@ -87,26 +88,28 @@ function Profile() {
 					{edit && (
 						<form className="editName-form" onSubmit={handleEdit}>
 							<div className="editName-wrapper">
-								<input
-									type="text"
-									className="editName-input"
-									placeholder="First name"
-									required
-									onInput={(e) => {
-										newFirstName = e.target.value;
-									}}
-								></input>
-								<input
-									type="text"
-									className="editName-input"
-									placeholder="Last name"
-									required
-									onInput={(e) => {
-										newLastName = e.target.value;
-									}}
-								></input>
+								<div className="editName-fields">
+									<input
+										type="text"
+										className="editName-input"
+										placeholder="First name"
+										required
+										onInput={(e) => {
+											newFirstName = e.target.value;
+										}}
+									></input>
+									<input
+										type="text"
+										className="editName-input"
+										placeholder="Last name"
+										required
+										onInput={(e) => {
+											newLastName = e.target.value;
+										}}
+									></input>
+								</div>
 							</div>
-							<div className="editName-wrapper">
+							<div className="editName-wrapper editName-buttons">
 								<button className="editName-button" type="submit">
 									save
 								</button>
@@ -154,7 +157,7 @@ function Profile() {
 					</div>
 				</div>
 			</div>
-			<div className="footer">Copyright 2020 Argent Bank</div>
+			<Footer />
 		</div>
 	);
 }
